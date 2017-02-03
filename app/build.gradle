@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.meibohui.mbh"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        useLibrary 'org.apache.http.legacy'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    testCompile 'junit:junit:4.12'
+    //
+    compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.1'
+    //butterknife
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    compile files('libs/xstream-1.4.7.jar')//xml数据解析工具
+
+    compile 'com.github.baserecycleradapter:library:1.0.9'//baserecycleradapter
+    compile project(':infiniteviewpager')
+    //图形加载
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    compile 'com.google.code.gson:gson:2.3'//Gson
+    compile 'com.lzy.net:okgo:+'//OkHttp返回实例对象工具类
+
+    //以下SDK开发者请根据需要自行选择
+    //bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务，以下是最新的bmob-sdk:
+    //3.5.0：请务必查看下面注释[1]
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    //bmob-push：Bmob的推送包
+    compile 'cn.bmob.android:bmob-push:0.8'
+    //bmob-im：Bmob的即时通讯包，注意每个版本的im依赖特定版本的bmob-sdk，具体的依赖关系可查看下面注释[2]
+    compile 'cn.bmob.android:bmob-im:2.0.5@aar'
+    compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
+    //bmob-sms ：Bmob单独为短信服务提供的包
+    compile 'cn.bmob.android:bmob-sms:1.0.1'
+    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+    compile 'cn.bmob.android:http-legacy:1.0'
+}

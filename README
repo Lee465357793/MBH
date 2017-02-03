@@ -1,0 +1,94 @@
+
+1.开启子线程使用 ThreadUtils 类
+//使用样例：
+    ThreadUtils.runOnBackThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        // to do something
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+==================================================================
+2.弹出吐司使用 ToastUtils 类
+//使用样例：
+    ToastUtil.showTextToast(this, "msg");
+//or
+    ToastUtil.showTextToastById(this, R.string.app_error_message);
+
+===================================================================
+3.调试日志打印  使用 TLog 类
+//使用样例：
+    请查看该类学习使用
+
+==================================================================
+4.网络请求地址  使用 URLsUtils 类，进行统一管理
+
+==================================================================
+5.保存本地 XML 文件  使用 SharePrefUtils 类
+    存：//添加标记。是否第一次开启应用。
+    SharePrefUtil.saveBoolean(this, "isFirst", false);
+    取:
+    boolean isFirst = SharePrefUtil.getBoolean(SplashActivity.this, "isFirst", true);
+    其他请查看该类 学习使用
+
+===================================================================
+6.时间日期处理  使用 StringUtils 类； 查看该类学习使用
+===================================================================
+7.当前Activity中有使用 Handler 时，务必在关闭界面时，移除所以消息。
+//举例：
+public class A extend Activity{
+
+    private Handler mHandler = new Handler();
+
+    @Override
+        public void onDestroy() {
+            super.onDestroy();
+            mHandler.removeCallbacksAndMessages(null);
+        }
+    }
+
+===================================================================
+8.MyApplication 类中的 initOkGo()方法用来设置HTTP请求头
+
+===================================================================
+9.  网络请求：
+    //直接返回数据的实例对象
+    OkGo.post("https://android.api.kg-gold.party/v40/member/withdraw/log")
+                    .headers("app_uid", "1150")
+                    .headers("app_keycode", "ji7pskgwwesi1whfetod")
+                    .params("uid", "1150")
+                    .cacheKey("ewewe")//设置缓存的key
+                    .execute(new ModelCallBack<Medil>(this) {
+                    //BeanDialogCallback<Medil>：Medil为数据的封装bean
+                        @Override
+                        public void onSuccess(Medil medil, Call call, Response response) {
+                            tv.setText(medil.toString());
+                        }
+
+                        @Override
+                        public void onCacheSuccess(Medil s, Call call) {
+                            super.onCacheSuccess(s, call);
+                            tv.setText(s.toString());
+                        }
+                    });
+
+    //返回JSON数据
+    OkGo.post("https://android.api.kg-gold.party/v40/member/withdraw/log")
+                    .headers("app_uid", "1150")
+                    .headers("app_keycode", "ji7pskgwwesi1whfetod")
+                    .params("uid", "1150")
+                    .cacheKey("uuu")//设置缓存的key,缓存的key必须要不一样  否者会报错
+                    .execute(new StringCallBack(this) {
+                        @Override
+                        public void onSuccess(String s, Call call, Response response) {
+
+                            tv.setText(s);
+
+                        }
+                    });
+
+===========================================================================

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 按键点击 -->
+    <item android:state_checked="true" android:drawable="@mipmap/button_eye_pre"></item>
+    <!-- 按键无点击 -->
+    <item android:state_checked="false" android:drawable="@mipmap/button_eye_nor"></item>
+</selector>
